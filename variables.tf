@@ -32,3 +32,8 @@ variable "allow_http" {
   type    = bool
   default = false
 }
+
+variable "instance_count" {
+  type    = number
+  default = 1
+}

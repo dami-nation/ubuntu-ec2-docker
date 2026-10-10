@@ -69,9 +69,10 @@ resource "aws_security_group" "ubuntu_sg" {
 
 # EC2 instance with Docker installed via user_data
 resource "aws_instance" "ubuntu" {
+  count = var.instance_count
+
   ami                         = data.aws_ami.ubuntu_2204.id
   instance_type               = var.instance_type
-  subnet_id                   = data.aws_subnets.default.ids[0]
   vpc_security_group_ids      = [aws_security_group.ubuntu_sg.id]
   key_name                    = var.key_name
   associate_public_ip_address = true
@@ -80,6 +81,6 @@ resource "aws_instance" "ubuntu" {
   user_data_replace_on_change = true
 
   tags = {
-    Name = "${var.name_prefix}-ubuntu-docker"
+    Name = "${var.name_prefix}-${count.index + 1}"
   }
 }

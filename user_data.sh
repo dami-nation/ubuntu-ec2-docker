@@ -17,8 +17,9 @@ for i in $(seq 1 30); do
 done
 
 apt-get update -y
-apt-get install -y ca-certificates curl gnupg
+apt-get install -y ca-certificates curl gnupg apt-transport-https
 
+# Docker repo
 install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 chmod a+r /etc/apt/keyrings/docker.gpg
@@ -32,7 +33,20 @@ apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin do
 
 systemctl enable --now docker
 
-# Don't fail the whole script if usermod or version checks fail
+# Allow ubuntu user to run docker without sudo after next login
 usermod -aG docker ubuntu || true
+
+# Install kubectl
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+rm -f kubectl
+
+# Install kind
+curl -Lo /usr/local/bin/kind https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64
+chmod +x /usr/local/bin/kind
+
+# Verify installs
 docker --version || true
 docker compose version || true
+kubectl version --client || true
+kind --version || true
