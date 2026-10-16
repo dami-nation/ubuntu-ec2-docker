@@ -83,7 +83,7 @@ resource "aws_instance" "ubuntu" {
   tags = {
     Name = "${var.name_prefix}-${count.index + 1}"
   }
-  
+
   lifecycle {
     create_before_destroy = true
   }
