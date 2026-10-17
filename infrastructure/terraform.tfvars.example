@@ -1,0 +1,8 @@
+aws_region       = "us-east-1"
+name_prefix      = "ubuntu-docker"
+instance_type    = "t2.micro"
+key_name         = "YOUR-EC2-KEY-PAIR-NAME"
+private_key_path = "/path/to/your/private-key.pem"
+ssh_cidr         = "YOUR-PUBLIC-IP/32"
+allow_http       = false
+instance_count   = 1
