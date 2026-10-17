@@ -1,13 +1,8 @@
-<<<<<<< HEAD
 aws_region       = "us-east-1"
-key_name         = "YOUR-KP-NAME"
-private_key_path = "YOUR-KP-PATH"
+name_prefix      = "ubuntu-docker"
+instance_type    = "t2.micro"
+key_name         = "YOUR-EC2-KEY-PAIR-NAME"
+private_key_path = "/path/to/your/private-key.pem"
 ssh_cidr         = "YOUR-PUBLIC-IP/32"
 allow_http       = false
-=======
-region        = "us-east-1"
-instance_type = "t3.micro"
-ssh_cidr      = "YOUR_PUBLIC_IP/32"
-key_name      = "your-keypair-name"
-name          = "docker-lab"
->>>>>>> secondary/main
+instance_count   = 1

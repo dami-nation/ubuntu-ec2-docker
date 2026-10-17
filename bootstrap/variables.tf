@@ -1,7 +1,7 @@
 variable "aws_region" {
-  type    = string
+  type        = string
   description = "AWS region for the state bucket"
-  default = "us-east-1"
+  default     = "us-east-1"
 }
 
 variable "state_bucket_name" {
